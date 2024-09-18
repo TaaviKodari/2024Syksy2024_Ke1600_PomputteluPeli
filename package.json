@@ -1,0 +1,16 @@
+{
+  "name": "2024syksy2024_ke1600_pomputtelupeli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.20.0"
+  },
+  "type": "module"
+}
