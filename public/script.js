@@ -15,10 +15,28 @@ function setup(){
 function draw(){
     background("black");
     draw_paddle();
-    image(ghostImage,0,0,64,64);
-
+    
 }
 
 function draw_paddle(){
     rect(mouseX,paddleYPosition,paddleWidth,paddleHeight);
+}
+
+
+class Ghost{
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.width = 30;
+        this.height = 30;
+        this.xSpeed = 1;
+        this.ySpeed = -1;
+        this.gravity = 0.05;
+    }
+    
+    Move(){
+        
+        image(ghostImage,this.x,this.y,this.width,this.height);
+        
+    }
 }
