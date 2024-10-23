@@ -1,6 +1,10 @@
 let paddleWidth = 55;
 let paddleHeight = 30;
 let paddleYPosition = 400;
+
+let gameHeight;
+let gameWidth;
+
 let ghostImage;
 
 let ghostOlio;
@@ -11,7 +15,12 @@ function preload(){
 }
 
 function setup(){
-    createCanvas(windowWidth,windowHeight);
+    gameWidth = windowWidth;
+    gameHeight = windowWidth /3;
+
+    paddleYPosition =  gameHeight - paddleHeight;
+
+    createCanvas(gameWidth,gameHeight);
     background("black");
     ghostOlio = new Ghost();
     ghostOlio2 = new Ghost();
@@ -44,6 +53,12 @@ class Ghost{
         this.x = this.x + this.xSpeed;
 
         this.ySpeed = this.ySpeed + this.gravity;
+
+        if(this.y > paddleYPosition){
+            if(this.x > mouseX && this.x < mouseX + paddleWidth){
+                this.ySpeed = -abs(this.ySpeed);
+            }
+        }
 
         this.y = this.y + this.ySpeed;
         image(ghostImage,this.x,this.y,this.width,this.height);
