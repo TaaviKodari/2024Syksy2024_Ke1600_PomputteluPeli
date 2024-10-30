@@ -6,9 +6,9 @@ let gameHeight;
 let gameWidth;
 
 let ghostImage;
-
-let ghostOlio;
-let ghostOlio2;
+let olioLista = [];
+//let ghostOlio;
+//let ghostOlio2;
 
 function preload(){
     ghostImage = loadImage("Images/ghost.png");
@@ -22,21 +22,40 @@ function setup(){
 
     createCanvas(gameWidth,gameHeight);
     background("black");
-    ghostOlio = new Ghost();
-    ghostOlio2 = new Ghost();
+    luo_olio();
+    //ghostOlio = new Ghost();
+    //ghostOlio2 = new Ghost();
 }
 
 function draw(){
     background("black");
     draw_paddle();
-    ghostOlio.Move();
-    ghostOlio2.Move();
+    //ghostOlio.Move();
+    //ghostOlio2.Move();
+    liikuta_olioita();
 }
 
 function draw_paddle(){
     rect(mouseX,paddleYPosition,paddleWidth,paddleHeight);
 }
 
+function luo_olio(){
+    let uusiOlio = new Ghost();
+    olioLista.unshift(uusiOlio);
+    //console.log(olioLista);
+    setTimeout(luo_olio,2000);
+}
+
+function liikuta_olioita(){
+    olioLista.forEach(function(olio,index){
+        olio.Move();
+
+        if(olio.y > gameHeight){
+            olioLista.splice(index,1);
+        }
+
+    })
+}
 
 class Ghost{
     constructor(){
