@@ -1,4 +1,4 @@
-let paddleWidth = 55;
+let paddleWidth = 80;
 let paddleHeight = 30;
 let paddleYPosition = 400;
 
@@ -7,11 +7,18 @@ let gameWidth;
 
 let ghostImage;
 let olioLista = [];
+
+let bgImage;
+
+let score = 0;
+let lives = 3;
+
 //let ghostOlio;
 //let ghostOlio2;
 
 function preload(){
     ghostImage = loadImage("Images/ghost.png");
+    bgImage = loadImage("Images/bg.jpg");
 }
 
 function setup(){
@@ -28,7 +35,8 @@ function setup(){
 }
 
 function draw(){
-    background("black");
+    //background("black");
+    piirra_tausta();
     draw_paddle();
     //ghostOlio.Move();
     //ghostOlio2.Move();
@@ -37,6 +45,10 @@ function draw(){
 
 function draw_paddle(){
     rect(mouseX,paddleYPosition,paddleWidth,paddleHeight);
+}
+
+function piirra_tausta(){
+    image(bgImage,0,0,gameWidth,gameHeight);
 }
 
 function luo_olio(){
@@ -52,6 +64,12 @@ function liikuta_olioita(){
 
         if(olio.y > gameHeight){
             olioLista.splice(index,1);
+            lives = lives - 1;
+        }
+
+        if(olio.x > gameWidth){
+            olioLista.splice(index,1);
+            score = score +1;
         }
 
     })
@@ -59,7 +77,7 @@ function liikuta_olioita(){
 
 class Ghost{
     constructor(){
-        this.x = 0;
+        this.x = random(-10,0);
         this.y = random(0,50);
         this.width = 30;
         this.height = 30;
