@@ -12,6 +12,7 @@ let bgImage;
 
 let score = 0;
 let lives = 3;
+//let timer = 10;
 
 //let ghostOlio;
 //let ghostOlio2;
@@ -30,10 +31,12 @@ function setup(){
     createCanvas(gameWidth,gameHeight);
     background("black");
     luo_olio();
+    //Aloita_timer();
     //ghostOlio = new Ghost();
     //ghostOlio2 = new Ghost();
 }
 
+//Function timer(){timer = timer -1; if(timer <= 0){noLoop; gameover()} setTimeOut(timer)}
 function draw(){
     //background("black");
     piirra_tausta();
@@ -41,6 +44,7 @@ function draw(){
     //ghostOlio.Move();
     //ghostOlio2.Move();
     liikuta_olioita();
+    piirra_UI();
 }
 
 function draw_paddle(){
@@ -65,6 +69,9 @@ function liikuta_olioita(){
         if(olio.y > gameHeight){
             olioLista.splice(index,1);
             lives = lives - 1;
+            if(lives < 0){
+                gameOver();
+            }
         }
 
         if(olio.x > gameWidth){
@@ -73,6 +80,21 @@ function liikuta_olioita(){
         }
 
     })
+}
+
+function gameOver(){
+    noLoop();
+    textSize(50);
+    textAlign(CENTER);
+    fill("red");
+    text('GAME OVER',gameWidth/2,gameHeight/2);
+}
+
+function piirra_UI(){
+    textSize(20)
+    textAlign(LEFT, TOP);
+    fill("white");
+    text('Score: ' + score + '\nLives: ' + lives,5,10);
 }
 
 class Ghost{
